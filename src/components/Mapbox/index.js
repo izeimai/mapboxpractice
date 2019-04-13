@@ -13,7 +13,8 @@ class Mapbox extends Component {
       height: 450,
       latitude: 39.9526,
       longitude: -75.1652,
-      zoom: 12
+      zoom: 12,
+      maxZoom: 15
     }
   };
 
