@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl';
 import './style.css';
 import yogaStudio from '../../yoga-studio.json';
 
@@ -46,6 +46,11 @@ class Mapbox extends Component {
         mapboxApiAccessToken={MAPBOX_PASS}
         onViewportChange={(viewport) => this.setState({ viewport })}
       >
+        <GeolocateControl
+          onViewportChange={this._onViewportChange}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+        />
         {yogaStudio.map(this._renderMarker)}
       </ReactMapGL>
     );
