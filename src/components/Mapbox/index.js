@@ -13,8 +13,7 @@ class Mapbox extends Component {
       height: 450,
       latitude: 39.9526,
       longitude: -75.1652,
-      zoom: 12,
-      maxZoom: 15
+      zoom: 12
     }
   };
 
@@ -29,7 +28,7 @@ class Mapbox extends Component {
   _renderMarker(studio, i) {
     const { name, coordinates, url } = studio;
     return (
-      <Marker key={i} longitude={coordinates[0]} latitude={coordinates[1]}
+      <Marker key={i} longitude={coordinates.longitude} latitude={coordinates.latitude}
         captureDrag={false} captureDoubleClick={false}>
         <a href={url}>
           <div className="studio">
