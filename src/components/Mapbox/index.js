@@ -1,9 +1,12 @@
-import React, {Component} from 'react';
-import ReactMapGL from 'react-map-gl';
+import React, { Component } from 'react';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import './style.css';
- 
+import yogaStudio from '../../yoga-studio.json';
+
+const MAPBOX_PASS = `${process.env.REACT_APP_MAPBOX_PASS}`;
+
 class Mapbox extends Component {
- 
+
   state = {
     viewport: {
       width: 450,
@@ -11,18 +14,40 @@ class Mapbox extends Component {
       latitude: 39.9526,
       longitude: -75.1652,
       zoom: 12
-    },
-    MAPBOX_PASS : `${process.env.REACT_APP_MAPBOX_PASS}`
+    }
   };
 
- 
+  _onViewportChange = viewport => this.setState({ viewport });
+
+  _onInteractionStateChange = interactionState => this.setState({ interactionState });
+
+  _onSettingChange = (name, value) => this.setState({
+    settings: { ...this.state.settings, [name]: value }
+  });
+
+  _renderMarker(studio, i) {
+    const { name, coordinates, url } = studio;
+    return (
+      <Marker key={i} longitude={coordinates[0]} latitude={coordinates[1]}
+        captureDrag={false} captureDoubleClick={false}>
+        <a href={url}>
+          <div className="studio">
+            <span>{name}</span>
+          </div>
+        </a>
+      </Marker>
+    );
+  }
+
   render() {
     return (
       <ReactMapGL className="map"
         {...this.state.viewport}
-        mapboxApiAccessToken={this.state.MAPBOX_PASS}
-        onViewportChange={(viewport) => this.setState({viewport})}
-      />
+        mapboxApiAccessToken={MAPBOX_PASS}
+        onViewportChange={(viewport) => this.setState({ viewport })}
+      >
+        {yogaStudio.map(this._renderMarker)}
+      </ReactMapGL>
     );
   }
 }
