@@ -12,15 +12,15 @@ class Mapbox extends Component {
       longitude: -75.1652,
       zoom: 12
     },
-    API_KEY : `${process.env.REACT_APP_MAPBOX_PASS}`
+    MAPBOX_PASS : `${process.env.REACT_APP_MAPBOX_PASS}`
   };
 
  
   render() {
     return (
-      <ReactMapGL 
+      <ReactMapGL className="map"
         {...this.state.viewport}
-        mapboxApiAccessToken={this.state.API_KEY}
+        mapboxApiAccessToken={this.state.MAPBOX_PASS}
         onViewportChange={(viewport) => this.setState({viewport})}
       />
     );

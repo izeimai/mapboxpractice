@@ -1,3 +1,19 @@
+# How to add MapBox to your React
+
+## Critical changes
+* Adding the map as a component
+import ReactMapGL from 'react-map-gl';
+
+* Hiding the MapBox access token
+1) In the .env file, name the variable with "REACT_APP_" 
+2) call the process.env like this: 
+```
+${process.env.REACT_APP_whateveryoucalledit}`
+```
+
+---
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
